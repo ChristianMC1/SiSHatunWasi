@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\ClientMain;
+use App\Livewire\Dashboard;
 use App\Livewire\HomePage;
 
 Route::get('/', HomePage::class)->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/clients', ClientMain::class)->name('clients');
 });
 
