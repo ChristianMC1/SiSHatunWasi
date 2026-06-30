@@ -38,7 +38,7 @@
 
         <flux:table.rows>
 
-            @foreach ($clientes as $item)
+            @foreach ($clients as $item)
 
                 <flux:table.row>
 
@@ -74,6 +74,11 @@
                     <flux:table.cell>
 
                         <flux:button
+                            wire:click="openUpload({{$item}})"
+                            icon="photo">
+                        </flux:button>
+
+                        <flux:button
                             wire:click="edit({{$item}})"
                             variant="primary"
                             color="amber"
@@ -98,7 +103,7 @@
     </flux:table>
 
     <div>
-        {{$clientes->links()}}
+        {{$clients->links()}}
     </div>
 
     <!-- MODAL -->
@@ -158,49 +163,63 @@
 
     <!-- MODAL DELETE -->
 
-    <flux:modal
-        name="delete-profile"
-        class="min-w-[22rem]">
+    <flux:modal name="delete-profile" class="min-w-[22rem]">
 
         <div class="space-y-6">
 
             <div>
 
                 <flux:heading size="lg">
-                    ¿Borrar registro?
+                    Opciones de borrado
                 </flux:heading>
 
                 <flux:text class="mt-2">
-
-                    You're about to delete this client.
-                    <br>
-                    This action cannot be reversed.
-
+                    Selecciona el tipo de borrado para este cliente.
                 </flux:text>
 
             </div>
 
-            <div class="flex gap-2">
+            <div class="flex flex-col gap-2">
 
-                <flux:spacer />
+                <flux:button wire:click="delete()" variant="primary" color="orange" class="w-full cursor-pointer">
+                    Deshabilitar ( reversible )
+                </flux:button>
+
+                <flux:button wire:click="deletePermanent()" variant="danger" class="w-full cursor-pointer">
+                    Eliminar definitivamente
+                </flux:button>
+
+            </div>
+
+            <div class="flex justify-end">
 
                 <flux:modal.close>
 
                     <flux:button variant="ghost">
-                        Cancel
+                        Cancelar
                     </flux:button>
 
                 </flux:modal.close>
 
-                <flux:button
-                    wire:click="delete()"
-                    variant="danger">
-
-                    Borrar registro
-
-                </flux:button>
-
             </div>
+
+        </div>
+
+    </flux:modal>
+
+    <!-- MODAL UPLOAD IMAGES -->
+
+    <flux:modal name="showUpload" class="md:w-96">
+
+        <div class="space-y-6">
+
+            <div>
+                <flux:heading size="lg">Imágenes del cliente</flux:heading>
+            </div>
+
+            @if($clientSelectedId)
+                @livewire('image-uploader', ['model' => \App\Models\Client::find($clientSelectedId)], key($clientSelectedId))
+            @endif
 
         </div>
 

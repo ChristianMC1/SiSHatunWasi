@@ -1,10 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\Assistance;
-use App\Models\Cliente;
-use App\Models\Product;
+use App\Models\Client;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -18,11 +15,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Christian Mamani Condori',
             'email' => 'christianmamani587@gmail.com',
             'password' => bcrypt("12345678"),
+            'plain_password' => '12345678',
         ]);
 
-        Product::factory(3000)->create();
+        $this->call(ProductRealSeeder::class);
 
-        Cliente::factory(500)->create();
-        Assistance::factory(500)->create();
+        Client::factory(500)->create();
     }
 }

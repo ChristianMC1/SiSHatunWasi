@@ -1,58 +1,54 @@
-<x-layouts::auth :title="__('Log in')">
+<x-layouts::auth :title="__('Ingresar')">
     <div class="flex flex-col gap-6">
-        <x-auth-header :title="__('Log in to your account')" :description="__('Enter your email and password below to log in')" />
+        <x-auth-header :title="__('Acceso privado')" :description="__('Ingresa tu correo y contraseña para gestionar el sistema')" />
 
-        <!-- Session Status -->
-        <x-auth-session-status class="text-center" :status="session('status')" />
+        <x-auth-session-status class="text-center text-premium font-medium text-sm" :status="session('status')" />
 
         <form method="POST" action="{{ route('login.store') }}" class="flex flex-col gap-6">
             @csrf
 
-            <!-- Email Address -->
             <flux:input
                 name="email"
-                :label="__('Email address')"
+                :label="__('Correo electrónico')"
                 :value="old('email')"
                 type="email"
                 required
                 autofocus
                 autocomplete="email"
-                placeholder="email@example.com"
+                placeholder="admin@hatunwasi.com"
             />
 
-            <!-- Password -->
             <div class="relative">
                 <flux:input
                     name="password"
-                    :label="__('Password')"
+                    :label="__('Contraseña')"
                     type="password"
                     required
                     autocomplete="current-password"
-                    :placeholder="__('Password')"
+                    :placeholder="__('Contraseña')"
                     viewable
                 />
 
                 @if (Route::has('password.request'))
-                    <flux:link class="absolute top-0 text-sm end-0" :href="route('password.request')" wire:navigate>
-                        {{ __('Forgot your password?') }}
+                    <flux:link class="absolute top-0 text-sm end-0 text-premium hover:text-premium-light transition-colors duration-300" :href="route('password.request')" wire:navigate>
+                        {{ __('¿Olvidaste tu contraseña?') }}
                     </flux:link>
                 @endif
             </div>
 
-            <!-- Remember Me -->
-            <flux:checkbox name="remember" :label="__('Remember me')" :checked="old('remember')" />
+            <flux:checkbox name="remember" :label="__('Recordarme')" />
 
             <div class="flex items-center justify-end">
-                <flux:button variant="primary" type="submit" class="w-full" data-test="login-button">
-                    {{ __('Log in') }}
+                <flux:button variant="primary" type="submit" class="w-full bg-premium hover:bg-premium-light text-[#111111] font-semibold shadow-sm shadow-premium/20 transition-all duration-300 cursor-pointer">
+                    {{ __('Ingresar') }}
                 </flux:button>
             </div>
         </form>
 
         @if (Route::has('register'))
-            <div class="space-x-1 text-sm text-center rtl:space-x-reverse text-zinc-600 dark:text-zinc-400">
-                <span>{{ __('Don\'t have an account?') }}</span>
-                <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
+            <div class="space-x-1 text-sm text-center rtl:space-x-reverse text-[#C7C7C7]">
+                <span class="font-sans">{{ __('¿No tienes cuenta?') }}</span>
+                <flux:link class="text-premium hover:text-premium-light font-sans font-medium" :href="route('register')" wire:navigate>{{ __('Regístrate') }}</flux:link>
             </div>
         @endif
     </div>

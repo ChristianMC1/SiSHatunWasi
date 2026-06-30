@@ -1,0 +1,2 @@
+PROYECTO: SiSHatunWasi desarrollado en Laravel y Livewire.
+REGLA ESTRICTA DE FRONTEND: Queda totalmente prohibido el uso de etiquetas HTML tradicionales como table, button, input o divs manuales para modales. Es obligatorio estructurar todas las vistas utilizando las etiquetas personalizadas del framework Flux UI. Por ejemplo: usar flux:button, flux:modal, flux:table, flux:heading y flux:input.

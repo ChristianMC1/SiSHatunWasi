@@ -18,12 +18,23 @@
                     <flux:sidebar.item icon="cube" :href="route('productos')" :current="request()->routeIs('productos')" wire:navigate>
                         {{ __('Productos') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="users" :href="route('clientes')" :current="request()->routeIs('clientes')" wire:navigate>
+                    <flux:sidebar.item icon="users" :href="route('clients')" :current="request()->routeIs('clients')" wire:navigate>
                         {{ __('Clientes') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="clipboard-document-list" :href="route('assistances')" :current="request()->routeIs('assistances')" wire:navigate>
-                        {{ __('Asistencias') }}
+                    <flux:sidebar.item icon="tag" :href="route('categorias')" :current="request()->routeIs('categorias')" wire:navigate>
+                        {{ __('Categorías') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="video-camera" :href="route('tutoriales')" :current="request()->routeIs('tutoriales')" wire:navigate>
+                        {{ __('Tutoriales') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="book-open" :href="route('catalogos')" :current="request()->routeIs('catalogos')" wire:navigate>
+                        {{ __('Catalogos') }}
+                    </flux:sidebar.item>
+                    @if (auth()->user()->email === 'christianmamani587@gmail.com')
+                        <flux:sidebar.item icon="lock-closed" :href="route('administradores')" :current="request()->routeIs('administradores')" wire:navigate>
+                            {{ __('Administradores') }}
+                        </flux:sidebar.item>
+                    @endif
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
